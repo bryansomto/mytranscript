@@ -1,13 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Lecturer from "./lecturer";
-
-
 import { Form, Button, Row, Col } from 'react-bootstrap';
-
 import { BrowserRouter as Router, } from "react-router-dom";
 
-    
 class ExamsGrade extends Component {
   constructor(props) {
     super(props);
@@ -17,42 +13,36 @@ class ExamsGrade extends Component {
     this.close = this.close.bind(this);
   }
 
-  // hideButton = () => {
-  //   console.log('here');
-  //   var submit = document.getElementById('submitGrade');
-  //   submit.setAttribute('visibility', 'hidden');
-  // }
-
   semesterChange = () => {
     const target = document.getElementById('tableArea');
     var selectValue = document.getElementById('semester');
     var table = document.createElement('table');
     table.setAttribute("class", "table table-striped text-center");
-    
+
     if (selectValue.value === 'second-semester') {
       target.innerHTML = '';
       var tableValueCT_2 = ['STATISTICAL METHODS IN ENGINEERING', 'COMPUTER SYSTEMS MANAGEMENT', 'COMPUTER GRAPHICS AND ANIMATION', 'MICROPROCESSOR IN CONTROL & INSTRUMENTATION', 'ENTREPRENEURSHIP DEVELOPMENT II', 'INTRO TO AI & EXPERT SYSTEMS', 'SEMINAR', 'PROJECT', 'FRENCH FOR TECHNICAL PURPOSES II'];
       var tableValueCC_2 = ['STA 429', 'COM 416', 'COM 422', 'CTE 421', 'EED 413', 'COM 423', 'CTE 423', 'CTE 424', 'GNS 428']
-      var tableValueCU_2 = [2,2,3,3,2,3,2,4,2];
+      var tableValueCU_2 = [2, 2, 3, 3, 2, 3, 2, 4, 2];
       target.appendChild(table);
       var tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
       table.innerHTML = tableHead;
       var tableBodyTarget = document.getElementById('tableBody');
-      for (var i=0; i < tableValueCC_2.length; i++) {
-        tableBodyTarget.innerHTML += "<tr><td>" + (i+1) + "</td><td class='courseCode'>" + tableValueCC_2[i] + "</td><td class='courseTitle'>" + tableValueCT_2[i] + "</td><td class='unit'>" + tableValueCU_2[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
+      for (var i = 0; i < tableValueCC_2.length; i++) {
+        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='courseCode'>" + tableValueCC_2[i] + "</td><td class='courseTitle'>" + tableValueCT_2[i] + "</td><td class='unit'>" + tableValueCU_2[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
       }
     }
     else if (selectValue.value === 'first-semester') {
       target.innerHTML = '';
       var tableValueCT_1 = ['NUMERICAL METHODS IN ENGINEERING', 'CONTROL ENGINEERING II', 'COMPUTER TECHNOLOGY', 'DATA COMMUNICATION & COMPUTER NETWORK', 'COMPUTER ARCHITECTURE II', 'RESEARCH METHODOLOGY', 'COMPUTER INSTALLATION & MAINTENANCE', 'SOFTWARE ENGINEERING', 'TELECOMMUNICATION ENGINEERING', 'FRENCH FOR TECHNICAL PURPOSES I', 'INTRODUCTION TO PSYCHOMETRIC STUDIES'];
       var tableValueCC_1 = ['MTH 321', 'EEC 433', 'CTE 410', 'CTE 411', 'CTE 412', 'CTE 414', 'CTE 413', 'CTE 415', 'EEE 316', 'GNS 417', 'GNS 106'];
-      var tableValueCU_1 = [2,3,3,3,3,2,2,3,3,2,2];
+      var tableValueCU_1 = [2, 3, 3, 3, 3, 2, 2, 3, 3, 2, 2];
       target.appendChild(table);
       var tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
       table.innerHTML = tableHead;
       var tableBodyTarget = document.getElementById('tableBody');
-      for (var i=0; i < tableValueCC_1.length; i++) {
-        tableBodyTarget.innerHTML += "<tr><td>" + (i+1) + "</td><td class='courseCode'>" + tableValueCC_1[i] + "</td><td class='courseTitle'>" + tableValueCT_1[i] + "</td><td class='unit'>" + tableValueCU_1[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
+      for (var i = 0; i < tableValueCC_1.length; i++) {
+        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='courseCode'>" + tableValueCC_1[i] + "</td><td class='courseTitle'>" + tableValueCT_1[i] + "</td><td class='unit'>" + tableValueCU_1[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
       }
     }
   }
@@ -77,7 +67,7 @@ class ExamsGrade extends Component {
 
     if (semester.value === 'first-semester' || semester.value === 'second-semester') {
       if (matNoPattern.test(matNo.value)) {
-        for (var i=0; i < scores.length; i++) {
+        for (var i = 0; i < scores.length; i++) {
           if (scores[i].value == '') {
             console.log('Score field should not be left blank. Insert 0 if score is unavailable.');
             scores[i].focus();
@@ -87,7 +77,7 @@ class ExamsGrade extends Component {
             scores[i].focus();
             scores[i].value = '';
           }
-          if (scores[i].value != '' && scores[i].value >! 100) {
+          if (scores[i].value != '' && scores[i].value > !100) {
             if (scores[i].value >= 75) {
               var GP = 4.00;
               var grade = 'A';
@@ -156,21 +146,21 @@ class ExamsGrade extends Component {
         }
 
         if (totalQPArr.length === scores.length) {
-          for (var j = 0; j < units.length; j++){
+          for (var j = 0; j < units.length; j++) {
             unitsArr.push(units[j].innerHTML);
           }
-          for (var i = 0; i < unitsArr.length; i++){
+          for (var i = 0; i < unitsArr.length; i++) {
             unitTotal += parseInt(unitsArr[i]);
             totalQP += parseFloat(totalQPArr[i]);
           }
-          console.log(totalQPArr, grades, unitTotal, (totalQP/unitTotal));
+          console.log(totalQPArr, grades, unitTotal, (totalQP / unitTotal));
           let popUpArea = document.getElementById('popUpArea');
           popUpArea.id = 'popUpAreaVisible';
           var popUpTable = document.getElementById('popUpTableBody');
-          document.getElementById('studentDetail').innerHTML = "<p> Matric Number: " + document.getElementById('matricnumber').value.toUpperCase() + "</p>";    
+          document.getElementById('studentDetail').innerHTML = "<p> Matric Number: " + document.getElementById('matricnumber').value.toUpperCase() + "</p>";
           for (var k = 0; k < courses.length; k++) {
             console.log(k);
-            popUpTable.innerHTML += "<tr><td>" + (k+1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
+            popUpTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
           }
           console.log(popUpTable);
           var hideButton = document.getElementById('submitButton');
@@ -210,24 +200,25 @@ class ExamsGrade extends Component {
         examUnit.push(examUnits[i].innerHTML);
         examGrade.push(examGrades[i].innerHTML);
       }
+      console.log(examName);
       this.props.createTranscript(matricNo, examName, examUnit, examGrade);
     } else {
       console.log('Close');
     }
   }
 
-  close () {
+  close() {
     document.getElementById('popUpAreaVisible').id = 'popUpArea';
     document.getElementById('submitButtonHide').id = 'submitButton';
     document.getElementById('popUpTableBody').innerHTML = '';
     document.getElementById('studentDetail').innerHTML = '';
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <body className="container" onMouseEnter={this.hideButton}>
         <div className="row">
-          <Lecturer  className=""/>
+          <Lecturer className="" />
           <section className="col-6 d-inline-block">
             <Form className="mt-4 row">
               <div className="col-md-6 d-inline-block">
@@ -248,7 +239,7 @@ class ExamsGrade extends Component {
                 <Form.Group as={Row} controlId="formLevel" className="mb-2">
                   <Form.Label className="d-inline" disabled> Level </Form.Label>
                   <Col xs='auto'>
-                    <Form.Control type="text" name="level"  value="HND 2" disabled />
+                    <Form.Control type="text" name="level" value="HND 2" disabled />
                     <Form.Text></Form.Text>
                   </Col>
                 </Form.Group>
@@ -257,14 +248,14 @@ class ExamsGrade extends Component {
                 <Form.Group as={Row} controlId="formYear" className="mb-2">
                   <Form.Label className="d-inline"> Year </Form.Label>
                   <Col xs='auto'>
-                    <Form.Select  id="year" size="md">
+                    <Form.Select id="year" size="md">
                       <option value="2021">2021</option>
                       <option value="2022">2022</option>
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
                     </Form.Select>
-                  <Form.Text></Form.Text>
-                </Col>
+                    <Form.Text></Form.Text>
+                  </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="formSemester" className="mb-2">
                   <Form.Label className="d-inline"> Semester </Form.Label>
@@ -278,18 +269,18 @@ class ExamsGrade extends Component {
                   </Col>
                 </Form.Group>
               </div>
-                <Form.Group as={Row} controlId="formMatricnumber" className="mb-2">
-                  <Form.Label className="d-inline"> Matric No. </Form.Label>
-                  <Col xs='auto'>
-                    <Form.Control type="text" name="matricnumber" id="matricnumber" placeholder="H/CTE/19/0554" />
-                    <Form.Text></Form.Text>
-                  </Col>
-                </Form.Group>
+              <Form.Group as={Row} controlId="formMatricnumber" className="mb-2">
+                <Form.Label className="d-inline"> Matric No. </Form.Label>
+                <Col xs='auto'>
+                  <Form.Control type="text" name="matricnumber" id="matricnumber" placeholder="H/CTE/19/0554" />
+                  <Form.Text></Form.Text>
+                </Col>
+              </Form.Group>
             </Form>
           </section>
         </div>
         <section className="mt-3 container">
-          <section id= "tableArea">
+          <section id="tableArea">
 
           </section>
           <Button id='submitButton' variant='btn btn-success' onClick={this.submitGrade}> Submit Grade </Button>
@@ -314,7 +305,7 @@ class ExamsGrade extends Component {
           <Button id='close' variant='btn btn-primary' onClick={this.close}> Close </Button>
         </section>
       </body>
-      
+
     )
   }
 }

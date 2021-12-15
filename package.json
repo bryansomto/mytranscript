@@ -1,7 +1,6 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
@@ -16,6 +15,24 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Ike-Adinnu Somtochukwu Bryan",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryansomto/project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bryansomto/project/issues"
+  },
+  "homepage": "https://github.com/bryansomto/project#readme",
+  "description": "This is an Ethereum based decentralized application that allows Academic Institutions (FPI) provide students' academic transcripts on the internet securely and on time as desired by students. It also allows students share their academic transcript to potential employers based on request.",
+  "keywords": [
+    "ethereum",
+    "blockchain",
+    "transcript",
+    "dapp",
+    "react",
+    "solidity",
+    "dapp"
+  ]
 }
