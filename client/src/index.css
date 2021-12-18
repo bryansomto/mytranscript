@@ -63,3 +63,7 @@ Form{
 #submitButtonHide {
   display: none;
 }
+
+h1, Form{
+  font-variant: small-caps;
+}

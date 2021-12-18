@@ -38,16 +38,16 @@ contract('Transcript', (accounts) => {
 
 		it ('creates transcript', async () => {
 			assert.equal(transcriptCount, 1)
-			console.log(entry.logs)
+			// console.log(entry.logs)
 			let event = entry.logs[0].args
 			assert.equal(event.examName[0], 'CTE 413', 'Course code is correct')
 		})
 
 
-		it ('requests transcript', async () => {
+		it ('requests transcript and sends ether', async () => {
 			request = await transcript.requestTranscript('h/cte/19/0554')
 			// assert.equal(transcriptCount, 1)
-			console.log(request.logs)
+			// console.log(request.logs)
 		})
 
 		it('gets balance', async () => {

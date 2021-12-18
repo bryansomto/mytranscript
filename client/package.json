@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "transcript",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,6 +40,27 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "author": "",
-  "license": "ISC"
+  "author": "Ike-Adinnu Somtochukwu Bryan",
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryansomto/project.git"
+  },
+  "keywords": [
+    "ethereum",
+    "blockchain",
+    "transcript",
+    "dapp",
+    "react",
+    "truffle",
+    "solidity",
+    "javascript"
+  ],
+  "bugs": {
+    "url": "https://github.com/bryansomto/project/issues"
+  },
+  "homepage": "https://github.com/bryansomto/project#readme"
 }

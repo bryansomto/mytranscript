@@ -12,6 +12,8 @@ class NavBar extends Component {
 					        <Nav className="me-auto">
 					          <Nav.Link href="/">Home</Nav.Link>
 					          <Nav.Link href="/lecturer">Lecturer</Nav.Link>
+							  <Nav.Link href="/student">Student</Nav.Link>
+							  <Nav.Link href="/employer">Employer</Nav.Link>
 					        </Nav>
 				        	<small className="text-white text-nowrap d-none d-sm-none d-md-block"><span id="account">{this.props.account}</span></small>         
 				   		</Navbar.Collapse>              

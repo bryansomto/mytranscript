@@ -8,8 +8,8 @@ contract Transcript {
 	address payable public owner;
 
 	uint public transcriptCount = 0;
-	mapping(string => Result) results;
-	mapping (address => uint) balances;
+	mapping (string => Result) results;
+	mapping (string => Request) requests;
 
 	uint totalQP;
 
@@ -28,6 +28,11 @@ contract Transcript {
 		string[] examGrade;
 	}
 
+	struct Request {
+		string name;
+		string matricNo;
+	}
+
 	event Transfer (
 		address indexed _from, address indexed _to, uint _value
 	);
@@ -36,7 +41,7 @@ contract Transcript {
 		uint transcriptCount, address owner, string matricNo, string[] examName, uint[] examUnit, string[] examGrade
 	);
 
-	event Request (
+	event View (
 		uint transcriptCount, address owner, string matricNo, string[] examName, uint[] examUnit, string[] examGrade
 	);
 
@@ -45,23 +50,36 @@ contract Transcript {
 		// Require a valid name
 		require(bytes(_matricNo).length > 0);
 		transcriptCount++;
-		results[_matricNo] = Result(transcriptCount, owner,  _matricNo, _examName, _examUnit, _examGrade);
+		results[_matricNo] = Result(transcriptCount, creator,  _matricNo, _examName, _examUnit, _examGrade);
 		emit Entry(transcriptCount, creator,  _matricNo, _examName, _examUnit, _examGrade);
 	}
 
-	function requestTranscript(string memory _matricNo) public payable returns (string memory, string[] memory, uint[] memory, string[] memory){
+	function viewTranscript(string memory _matricNo) public payable returns (string memory, string[] memory, uint[] memory, string[] memory) {
+		require(bytes(_matricNo).length > 0);
 		sendEth();
 		address requestor = msg.sender;
 		return (results[_matricNo].matricNo, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
-		emit Request(transcriptCount, requestor, results[_matricNo].matricNo, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
+		emit View(transcriptCount, requestor, results[_matricNo].matricNo, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
+	}
+
+	function createRequest (string memory _name, string memory _matricNo) public payable returns (string memory) {
+		require(bytes(_matricNo).length > 0);
+		requests[_matricNo] = Request(_name, _matricNo);
+		return ("Your request was sent successfuly");
+	}
+
+	function viewRequest (string memory _matricNo) public payable returns (string memory) {
+		require(bytes(_matricNo).length > 0);
+		return (requests[_matricNo].name);
 	}
 
 	function sendEth() public payable returns (bool sufficient) {
 		address payable caller = msg.sender;
 		uint amount = 1 ether;
-		if (balances[caller] < amount) return false;
+		require (caller.balance >= amount);
 		caller.transfer(amount);
 		emit Transfer(caller, owner, amount);
+		withdraw();
 		return true;
 	}
 
@@ -69,6 +87,6 @@ contract Transcript {
 
 	function withdraw() public payable {
 		require(msg.sender == owner);
-		msg.sender.transfer(address(this).balance);
+		owner.transfer(address(this).balance);
 	}
 }
