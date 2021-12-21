@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, } from "react-router-dom";
 import Web3 from "web3";
-
 import NavBar from "./Navbar"
-import Transcript from "./contracts/Transcript.json";
+import Transcript from "./build/contracts/Transcript.json";
 import Home from "./pages/home";
 import Lecturer from "./pages/lecturer";
 import GradeScheme from "./pages/gradeScheme";
@@ -20,11 +19,8 @@ class App extends Component {
     await this.loadBlockchainData();
   }
 
-
-
   async loadWeb3() {
     window.addEventListener('load', async () => {
-      
       //Modern dapp browsers...
       if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
@@ -33,39 +29,33 @@ class App extends Component {
       //Legacy dapp browsers...
       else if (window.web3) {
         window.web3 = new Web3(window.web3.currentProvider);
-        // const Web3 = require('web3');
-        // let web3 = new Web3('HTTP://127.0.0.1:8545');
-        // console.log(web3);
       }
       //Non-dapp browsers...
       else {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
-
     });
   }
   
 
   async loadBlockchainData() {
-    // const web3 = new Web3('HTTP://127.0.0.1:8545');
     const web3 = new Web3(window.web3);
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
-    console.log(Transcript.abi, Transcript.networks[5777].address);
+    // console.log(Transcript.abi, Transcript.networks[5777].address);
     const networkId = await web3.eth.net.getId();
     const networkData = Transcript.networks[networkId];
     if (networkData) {
       const transcript = new web3.eth.Contract(Transcript.abi, networkData.address);
+      // console.log(Transcript.abi);
       this.setState({ transcript });
-      // const transcriptCount = await transcript.methods.transcriptCount().call();
-      // this.setState({ transcriptCount });
-      // console.log(transcriptCount);
-      // const transcriptCount = await transcript.methods.transcriptCount().call();
-      // console.log(transcriptCount);
+      const transcriptCount = await transcript.methods.transcriptCount().call();
+      this.setState({ transcriptCount });
+      console.log(transcriptCount);
       this.setState({ loading: false })
     } else {
-      window.alert('Transcript contract not deployed to the network.');
+      window.alert('Transcript not deployed to the network.');
     }
   }
 
@@ -93,12 +83,14 @@ class App extends Component {
   }
 
   viewTranscript(matricNo) {
-    this.setState({ loading: true });
-    this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false});
-    });
+    console.log( this.state.transcript.methods.getUser(matricNo));
+    // this.setState({ loading: true });
+    // this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
+    // .once('receipt', (receipt) => {
+    //   this.setState({ loading: false});
+    // });
   }
+  
 
   render() {
     return (

@@ -196,9 +196,9 @@ class ExamsGrade extends Component {
       var examGrade = [];
 
       for (var i = 0; i < examNames.length; i++) {
-        examName.push(String(examNames[i].innerHTML));
+        examName.push(examNames[i].innerHTML);
         examUnit.push(examUnits[i].innerHTML);
-        examGrade.push(String(examGrades[i].innerHTML));
+        examGrade.push(examGrades[i].innerHTML);
       }
       console.log(examName);
       this.props.createTranscript(matricNo, examName, examUnit, examGrade);

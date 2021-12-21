@@ -3,6 +3,10 @@ import { Form, Button, Nav, Navbar, Container, NavDropdown } from 'react-bootstr
 import { BrowserRouter as Router, Switch, Route, Link, } from "react-router-dom";
 
 class Lecturer extends Component {
+	constructor(props) {
+		super(props);
+	  }
+
 	render() {
 		return(
 			<section className="p-2 mt-3 m-auto col-6 col-md-4">

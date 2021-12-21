@@ -1,6 +1,6 @@
-const Transcript = artifacts.require("./Transcript.sol");
-require('../client/node_modules/chai')
-	.use(require('../client/node_modules/chai-as-promised'))
+const Transcript = artifacts.require("./contracts/Transcript.sol");
+require('../node_modules/chai')
+	.use(require('../node_modules/chai-as-promised'))
 	.should()
 
 contract('Transcript', (accounts) => {
@@ -25,7 +25,7 @@ contract('Transcript', (accounts) => {
 			let name = await transcript.name()
 			let owner = await transcript.owner()
 			assert.equal(name, "HCTE II Transcript")
-			assert.equal(owner, "0x2894C27b16CCaE4547099B8AD48A13F5474F0100")
+			assert.equal(owner, "0x662b707f420BFAD789ea1699e3B874eE04A3c837")
 		})
 	})
 
@@ -44,10 +44,16 @@ contract('Transcript', (accounts) => {
 		})
 
 
-		it ('requests transcript and sends ether', async () => {
-			request = await transcript.requestTranscript('h/cte/19/0554')
+		it ('views transcript and sends ether', async () => {
+			view = await transcript.viewTranscript('h/cte/19/0554')
 			// assert.equal(transcriptCount, 1)
-			// console.log(request.logs)
+			console.log(view.logs[0].args[0].toNumber())
+			console.log(view.logs[0].args[1])
+			console.log(view.logs[0].args[2])
+			console.log(view.logs[0].args[3])
+			console.log(view.logs[0].args[4][0].toNumber())
+			console.log(view.logs[0].args[4][1].toNumber())
+			console.log(view.logs[0].args[5])
 		})
 
 		it('gets balance', async () => {

@@ -8,7 +8,8 @@ contract Transcript {
 	address payable public owner;
 
 	uint public transcriptCount = 0;
-	mapping (string => Result) results;
+	mapping (string => Result) private results;
+	// mapping (uint => Result) public results;
 	mapping (string => Request) requests;
 
 	uint totalQP;
@@ -54,11 +55,15 @@ contract Transcript {
 		emit Entry(transcriptCount, creator,  _matricNo, _examName, _examUnit, _examGrade);
 	}
 
-	function viewTranscript(string memory _matricNo) public payable returns (string memory, string[] memory, uint[] memory, string[] memory) {
-		require(bytes(_matricNo).length > 0);
-		sendEth();
-		address requestor = msg.sender;
+	function getUser(string memory _matricNo) public payable returns (string memory, string[] memory, uint[] memory, string[] memory) {
 		return (results[_matricNo].matricNo, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
+	}
+
+	function viewTranscript(string memory _matricNo) public payable {
+		require(bytes(_matricNo).length > 0);
+		// sendEth();
+		address requestor = msg.sender;
+		getUser(_matricNo);
 		emit View(transcriptCount, requestor, results[_matricNo].matricNo, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
 	}
 
