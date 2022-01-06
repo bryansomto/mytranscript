@@ -55,14 +55,14 @@ class ExamsGrade extends Component {
     let scores = document.getElementsByClassName('score');
     let units = document.getElementsByClassName('unit');
 
-    let matNoPattern = /h\/cte\/19\/\d+/g;
+    let matNoPattern = /\w{1}\/\w{3}\/\d{2}\/\d+/g;
     let totalQPArr = [];
     let totalQP = 0;
     let unitsArr = [];
     let unitTotal = 0;
     let grades = [];
     let coursesArr = [];
-
+    // console.log(matNoPattern.test(matNo.value));
 
 
     if (semester.value === 'first-semester' || semester.value === 'second-semester') {
@@ -153,11 +153,12 @@ class ExamsGrade extends Component {
             unitTotal += parseInt(unitsArr[i]);
             totalQP += parseFloat(totalQPArr[i]);
           }
-          console.log(totalQPArr, grades, unitTotal, (totalQP / unitTotal));
+          const gpa = String(totalQP / unitTotal);
+          console.log(totalQPArr, grades, unitTotal, "GPA = " + gpa);
           let popUpArea = document.getElementById('popUpArea');
           popUpArea.id = 'popUpAreaVisible';
           var popUpTable = document.getElementById('popUpTableBody');
-          document.getElementById('studentDetail').innerHTML = "<p> Matric Number: " + document.getElementById('matricnumber').value.toUpperCase() + "</p>";
+          document.getElementById('studentDetail').innerHTML = "<p> <span> Matric Number: " + document.getElementById('matricnumber').value.toUpperCase() + "</span><br />" + "<span id='gpa'> Grade Point Average: " + gpa.substring(0,4) + "</span></p>";
           for (var k = 0; k < courses.length; k++) {
             console.log(k);
             popUpTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
@@ -188,6 +189,7 @@ class ExamsGrade extends Component {
     if (window.confirm("Are you sure all supplied data are correct? Continuing will cost gas fee and save data on the blockchain unrevocably.")) {
       console.log('Okay');
       let matricNo = document.getElementById('matricnumber').value;
+      let gpa = document.getElementById('gpa').innerHTML;
       let examNames = document.getElementsByClassName('examCode');
       let examUnits = document.getElementsByClassName('unit');
       let examGrades = document.getElementsByClassName('grade');
@@ -201,7 +203,8 @@ class ExamsGrade extends Component {
         examGrade.push(examGrades[i].innerHTML);
       }
       console.log(examName);
-      this.props.createTranscript(matricNo, examName, examUnit, examGrade);
+      console.log(gpa);
+      this.props.createTranscript(matricNo, gpa, examName, examUnit, examGrade);
     } else {
       console.log('Close');
     }
@@ -285,7 +288,7 @@ class ExamsGrade extends Component {
           </section>
           <Button id='submitButton' variant='btn btn-success' onClick={this.submitGrade}> Submit Grade </Button>
         </section>
-        <section id='popUpArea'>
+        <section id='popUpArea' className='col-md-8 m-auto'>
           <p id='studentDetail'></p>
           <table id='popUpTable' className="table table-striped text-center">
             <thead>

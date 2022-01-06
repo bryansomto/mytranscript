@@ -74,21 +74,22 @@ class App extends Component {
     this.viewTranscript = this.viewTranscript.bind(this);
   }
 
-  createTranscript(matricNo, examName, examUnit, examGrade) {
+  createTranscript(matricNo, gpa, examName, examUnit, examGrade) {
     this.setState({ loading: true });
-    this.state.transcript.methods.createTranscript(matricNo, examName, examUnit, examGrade).send({ from: this.state.account })
+    this.state.transcript.methods.createTranscript(matricNo, gpa, examName, examUnit, examGrade).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({ loading: false});
     });
   }
 
   viewTranscript(matricNo) {
-    console.log( this.state.transcript.methods.getUser(matricNo));
-    // this.setState({ loading: true });
-    // this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
-    // .once('receipt', (receipt) => {
-    //   this.setState({ loading: false});
-    // });
+    // console.log( this.state.transcript.methods.getUser(matricNo));
+    this.setState({ loading: true });
+    this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      console.log(receipt);
+      this.setState({ loading: false});
+    });
   }
   
 
