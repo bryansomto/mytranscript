@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Lecturer from "./lecturer";
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { BrowserRouter as Router, } from "react-router-dom";
@@ -15,34 +14,34 @@ class ExamsGrade extends Component {
 
   semesterChange = () => {
     const target = document.getElementById('tableArea');
-    var selectValue = document.getElementById('semester');
-    var table = document.createElement('table');
+    let selectValue = document.getElementById('semester');
+    let table = document.createElement('table');
     table.setAttribute("class", "table table-striped text-center");
 
     if (selectValue.value === 'second-semester') {
       target.innerHTML = '';
-      var tableValueCT_2 = ['STATISTICAL METHODS IN ENGINEERING', 'COMPUTER SYSTEMS MANAGEMENT', 'COMPUTER GRAPHICS AND ANIMATION', 'MICROPROCESSOR IN CONTROL & INSTRUMENTATION', 'ENTREPRENEURSHIP DEVELOPMENT II', 'INTRO TO AI & EXPERT SYSTEMS', 'SEMINAR', 'PROJECT', 'FRENCH FOR TECHNICAL PURPOSES II'];
-      var tableValueCC_2 = ['STA 429', 'COM 416', 'COM 422', 'CTE 421', 'EED 413', 'COM 423', 'CTE 423', 'CTE 424', 'GNS 428']
-      var tableValueCU_2 = [2, 2, 3, 3, 2, 3, 2, 4, 2];
+      let tableValueCT_2 = ['STATISTICAL METHODS IN ENGINEERING', 'COMPUTER SYSTEMS MANAGEMENT', 'COMPUTER GRAPHICS AND ANIMATION', 'MICROPROCESSOR IN CONTROL & INSTRUMENTATION', 'ENTREPRENEURSHIP DEVELOPMENT II', 'INTRO TO AI & EXPERT SYSTEMS', 'SEMINAR', 'PROJECT', 'FRENCH FOR TECHNICAL PURPOSES II'];
+      let tableValueCC_2 = ['STA 429', 'COM 416', 'COM 422', 'CTE 421', 'EED 413', 'COM 423', 'CTE 423', 'CTE 424', 'GNS 428']
+      let tableValueCU_2 = [2, 2, 3, 3, 2, 3, 2, 4, 2];
       target.appendChild(table);
-      var tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
+      let tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
       table.innerHTML = tableHead;
-      var tableBodyTarget = document.getElementById('tableBody');
-      for (var i = 0; i < tableValueCC_2.length; i++) {
-        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='courseCode'>" + tableValueCC_2[i] + "</td><td class='courseTitle'>" + tableValueCT_2[i] + "</td><td class='unit'>" + tableValueCU_2[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
+      let tableBodyTarget = document.getElementById('tableBody');
+      for (let i = 0; i < tableValueCC_2.length; i++) {
+        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='examCode'>" + tableValueCC_2[i] + "</td><td class='examName'>" + tableValueCT_2[i] + "</td><td class='examUnit'>" + tableValueCU_2[i] + "</td><td><input type='number' class='examScore form-control'/></td></tr>"
       }
     }
     else if (selectValue.value === 'first-semester') {
       target.innerHTML = '';
-      var tableValueCT_1 = ['NUMERICAL METHODS IN ENGINEERING', 'CONTROL ENGINEERING II', 'COMPUTER TECHNOLOGY', 'DATA COMMUNICATION & COMPUTER NETWORK', 'COMPUTER ARCHITECTURE II', 'RESEARCH METHODOLOGY', 'COMPUTER INSTALLATION & MAINTENANCE', 'SOFTWARE ENGINEERING', 'TELECOMMUNICATION ENGINEERING', 'FRENCH FOR TECHNICAL PURPOSES I', 'INTRODUCTION TO PSYCHOMETRIC STUDIES'];
-      var tableValueCC_1 = ['MTH 321', 'EEC 433', 'CTE 410', 'CTE 411', 'CTE 412', 'CTE 414', 'CTE 413', 'CTE 415', 'EEE 316', 'GNS 417', 'GNS 106'];
-      var tableValueCU_1 = [2, 3, 3, 3, 3, 2, 2, 3, 3, 2, 2];
+      let tableValueCT_1 = ['NUMERICAL METHODS IN ENGINEERING', 'CONTROL ENGINEERING II', 'COMPUTER TECHNOLOGY', 'DATA COMMUNICATION & COMPUTER NETWORK', 'COMPUTER ARCHITECTURE II', 'RESEARCH METHODOLOGY', 'COMPUTER INSTALLATION & MAINTENANCE', 'SOFTWARE ENGINEERING', 'TELECOMMUNICATION ENGINEERING', 'FRENCH FOR TECHNICAL PURPOSES I', 'INTRODUCTION TO PSYCHOMETRIC STUDIES'];
+      let tableValueCC_1 = ['MTH 321', 'EEC 433', 'CTE 410', 'CTE 411', 'CTE 412', 'CTE 414', 'CTE 413', 'CTE 415', 'EEE 316', 'GNS 417', 'GNS 106'];
+      let tableValueCU_1 = [2, 3, 3, 3, 3, 2, 2, 3, 3, 2, 2];
       target.appendChild(table);
-      var tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
+      let tableHead = "<thead id = 'tableHead'><tr><th>#</th><th>Course Code</th><th>Course Title</th><th>Course Unit</th><th>Course Score</th></tr></thead><tbody id = 'tableBody'></tbody>";
       table.innerHTML = tableHead;
-      var tableBodyTarget = document.getElementById('tableBody');
-      for (var i = 0; i < tableValueCC_1.length; i++) {
-        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='courseCode'>" + tableValueCC_1[i] + "</td><td class='courseTitle'>" + tableValueCT_1[i] + "</td><td class='unit'>" + tableValueCU_1[i] + "</td><td><input type='number' class='score form-control'/></td></tr>"
+      let tableBodyTarget = document.getElementById('tableBody');
+      for (let i = 0; i < tableValueCC_1.length; i++) {
+        tableBodyTarget.innerHTML += "<tr><td>" + (i + 1) + "</td><td class='examCode'>" + tableValueCC_1[i] + "</td><td class='examName'>" + tableValueCT_1[i] + "</td><td class='examUnit'>" + tableValueCU_1[i] + "</td><td><input type='number' class='examScore form-control'/></td></tr>"
       }
     }
   }
@@ -50,10 +49,10 @@ class ExamsGrade extends Component {
   submitGrade() {
     let semester = document.getElementById('semester');
     let matNo = document.getElementById('matricnumber');
-    let courses = document.getElementsByClassName('courseCode');
-    let courseTitle = document.getElementsByClassName('courseTitle');
-    let scores = document.getElementsByClassName('score');
-    let units = document.getElementsByClassName('unit');
+    let examCodes = document.getElementsByClassName('examCode');
+    let examNames = document.getElementsByClassName('examName');
+    let examScores = document.getElementsByClassName('examScore');
+    let examUnits = document.getElementsByClassName('examUnit');
 
     let matNoPattern = /\w{1}\/\w{3}\/\d{2}\/\d+/g;
     let totalQPArr = [];
@@ -61,83 +60,83 @@ class ExamsGrade extends Component {
     let unitsArr = [];
     let unitTotal = 0;
     let grades = [];
-    let coursesArr = [];
+    // let coursesArr = [];
     // console.log(matNoPattern.test(matNo.value));
 
 
     if (semester.value === 'first-semester' || semester.value === 'second-semester') {
       if (matNoPattern.test(matNo.value)) {
-        for (var i = 0; i < scores.length; i++) {
-          if (scores[i].value == '') {
-            console.log('Score field should not be left blank. Insert 0 if score is unavailable.');
-            scores[i].focus();
+        for (let i = 0; i < examScores.length; i++) {
+          if (examScores[i].value == '') {
+            console.log('Score field should not be left blank. Insert 0 if examScore is unavailable.');
+            examScores[i].focus();
           }
-          if (scores[i].value > 100) {
-            console.log('score should not exceed 100');
-            scores[i].focus();
-            scores[i].value = '';
+          if (examScores[i].value > 100) {
+            console.log('examScore should not exceed 100');
+            examScores[i].focus();
+            examScores[i].value = '';
           }
-          if (scores[i].value != '' && scores[i].value > !100) {
-            if (scores[i].value >= 75) {
-              var GP = 4.00;
-              var grade = 'A';
-              var QP = parseInt(units[i].innerHTML) * GP;
+          if (examScores[i].value != '' && examScores[i].value > !100) {
+            if (examScores[i].value >= 75) {
+              let GP = 4.00;
+              let grade = 'A';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 70) {
-              var GP = 3.50;
-              var grade = 'AB';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 70) {
+              let GP = 3.50;
+              let grade = 'AB';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 65) {
-              var GP = 3.25;
-              var grade = 'B';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 65) {
+              let GP = 3.25;
+              let grade = 'B';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 60) {
-              var GP = 3.00;
-              var grade = 'BC';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 60) {
+              let GP = 3.00;
+              let grade = 'BC';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 55) {
-              var GP = 2.75;
-              var grade = 'C';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 55) {
+              let GP = 2.75;
+              let grade = 'C';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 50) {
-              var GP = 2.50;
-              var grade = 'CD';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 50) {
+              let GP = 2.50;
+              let grade = 'CD';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 45) {
-              var GP = 2.25;
-              var grade = 'D';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 45) {
+              let GP = 2.25;
+              let grade = 'D';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
-            else if (scores[i].value >= 40) {
-              var GP = 2.00;
-              var grade = 'E';
-              var QP = parseInt(units[i].innerHTML) * GP;
+            else if (examScores[i].value >= 40) {
+              let GP = 2.00;
+              let grade = 'E';
+              let QP = parseInt(examUnits[i].innerHTML) * GP;
               totalQPArr.push(QP);
               grades.push(grade);
             }
             else {
-              var GP = 0;
-              var grade = 'F';
-              var QP = 0;
+              let GP = 0;
+              let grade = 'F';
+              let QP = 0;
               totalQPArr.push(QP);
               grades.push(grade);
             }
@@ -145,11 +144,11 @@ class ExamsGrade extends Component {
           }
         }
 
-        if (totalQPArr.length === scores.length) {
-          for (var j = 0; j < units.length; j++) {
-            unitsArr.push(units[j].innerHTML);
+        if (totalQPArr.length === examScores.length) {
+          for (let j = 0; j < examUnits.length; j++) {
+            unitsArr.push(examUnits[j].innerHTML);
           }
-          for (var i = 0; i < unitsArr.length; i++) {
+          for (let i = 0; i < unitsArr.length; i++) {
             unitTotal += parseInt(unitsArr[i]);
             totalQP += parseFloat(totalQPArr[i]);
           }
@@ -157,16 +156,15 @@ class ExamsGrade extends Component {
           console.log(totalQPArr, grades, unitTotal, "GPA = " + gpa);
           let popUpArea = document.getElementById('popUpArea');
           popUpArea.id = 'popUpAreaVisible';
-          var popUpTable = document.getElementById('popUpTableBody');
+          let popUpTable = document.getElementById('popUpTableBody');
           document.getElementById('studentDetail').innerHTML = "<p> <span> Matric Number: " + document.getElementById('matricnumber').value.toUpperCase() + "</span><br />" + "<span id='gpa'> Grade Point Average: " + gpa.substring(0,4) + "</span></p>";
-          for (var k = 0; k < courses.length; k++) {
+          for (let k = 0; k < unitsArr.length; k++) {
             console.log(k);
-            popUpTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
+            popUpTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + examCodes[k].innerHTML + "</td><td class='examNamePOP'>" + examNames[k].innerHTML + "</td><td class='examUnitPOP'>" + unitsArr[k] + "</td><td class='examGradePOP'>" + grades[k] + "</td></tr>";
           }
           console.log(popUpTable);
-          var hideButton = document.getElementById('submitButton');
+          let hideButton = document.getElementById('submitButton');
           hideButton.id = 'submitButtonHide';
-
         }
       }
 
@@ -190,21 +188,28 @@ class ExamsGrade extends Component {
       console.log('Okay');
       let matricNo = document.getElementById('matricnumber').value;
       let gpa = document.getElementById('gpa').innerHTML;
-      let examNames = document.getElementsByClassName('examCode');
-      let examUnits = document.getElementsByClassName('unit');
-      let examGrades = document.getElementsByClassName('grade');
-      var examName = [];
-      var examUnit = [];
-      var examGrade = [];
+      let examCodes = document.getElementsByClassName('examCodePOP');
+      let examNames = document.getElementsByClassName('examNamePOP');
+      let examUnits = document.getElementsByClassName('examUnitPOP');
+      let examGrades = document.getElementsByClassName('examGradePOP');
+      let examCode = [];
+      let examName = [];
+      let examUnit = [];
+      let examGrade = [];
 
-      for (var i = 0; i < examNames.length; i++) {
+      for (let i = 0; i < examNames.length; i++) {
+        // console.log(examNames.length)
+        examCode.push(examCodes[i].innerHTML);
         examName.push(examNames[i].innerHTML);
-        examUnit.push(examUnits[i].innerHTML);
+        examUnit.push(parseInt(examUnits[i].innerHTML));
         examGrade.push(examGrades[i].innerHTML);
       }
       console.log(examName);
-      console.log(gpa);
-      this.props.createTranscript(matricNo, gpa, examName, examUnit, examGrade);
+      console.log(gpa, examUnit);
+      // let examUnit_Int = examUnit.map(function(x) {
+      //   return parseInt(x);
+      // });
+      this.props.createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade);
     } else {
       console.log('Close');
     }

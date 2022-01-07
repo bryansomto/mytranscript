@@ -11,10 +11,11 @@ import ViewTranscript from "./pages/viewTranscript";
 import Student from "./pages/student";
 import EmployerRequest from "./pages/employerRequest";
 import Employer from "./pages/employer";
+import PrintLayout from "./pages/printLayout";
 
 class App extends Component {
 
-  async UNSAFE_componentWillMount() {
+  async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
@@ -65,6 +66,7 @@ class App extends Component {
       account: '',
       transcriptCount: 0,
       matricNo: '',
+      gpa: '',
       examName: [],
       examUnit: [],
       examGrade: [],
@@ -72,11 +74,12 @@ class App extends Component {
     }
     this.createTranscript = this.createTranscript.bind(this);
     this.viewTranscript = this.viewTranscript.bind(this);
+    this.layout = this.layout.bind(this);
   }
 
-  createTranscript(matricNo, gpa, examName, examUnit, examGrade) {
+  createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade) {
     this.setState({ loading: true });
-    this.state.transcript.methods.createTranscript(matricNo, gpa, examName, examUnit, examGrade).send({ from: this.state.account })
+    this.state.transcript.methods.createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({ loading: false});
     });
@@ -88,8 +91,24 @@ class App extends Component {
     this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       console.log(receipt);
-      this.setState({ loading: false});
+      let events = receipt.events.View.returnValues;
+      let matNo = events.matricNo;
+      let gpa = events.gpa;
+      let examCode = events.examCode
+      let examName = events.examName;
+      let examUnit = events.examUnit;
+      let examGrade = events.examGrade;
+      this.setState({ matricNo: matNo, gpa: gpa, examName: examName, examUnit: examUnit, examGrade: examGrade, loading: false });
+      // this.setState({ loading: false });
+      window.location.href = "/printLayout";
     });
+  }
+
+  layout() {
+        console.log("layout", this.state);
+        // for (var k = 0; k < this.examName.length; k++) {
+        //     layoutTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
+        // }
   }
   
 
@@ -125,7 +144,9 @@ class App extends Component {
             <Route exact path="/employer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
-            
+            <Route exact path="/printLayout">
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <PrintLayout layout={this.layout}/>}
+            </Route>
         </Router>
        </body>
     )

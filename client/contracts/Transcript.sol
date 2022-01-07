@@ -25,6 +25,7 @@ contract Transcript {
 		address owner;
 		string matricNo;
 		string gpa;
+		string[] examCode;
 		string[] examName;
 		uint[] examUnit;
 		string[] examGrade;
@@ -40,24 +41,24 @@ contract Transcript {
 	);
 	
 	event Entry (
-		uint transcriptCount, address owner, string matricNo, string gpa, string[] examName, uint[] examUnit, string[] examGrade
+		uint transcriptCount, address owner, string matricNo, string gpa, string[] examCode, string[] examName, uint[] examUnit, string[] examGrade
 	);
 
 	event View (
-		uint transcriptCount, address owner, string matricNo, string gpa, string[] examName, uint[] examUnit, string[] examGrade
+		uint transcriptCount, address owner, string matricNo, string gpa, string[] examCode, string[] examName, uint[] examUnit, string[] examGrade
 	);
 
-	function createTranscript(string memory _matricNo, string memory _gpa, string[] memory _examName, uint[] memory _examUnit, string[] memory _examGrade) public payable {
+	function createTranscript(string memory _matricNo, string memory _gpa, string[] memory _examCode, string[] memory _examName, uint[] memory _examUnit, string[] memory _examGrade) public payable {
 		address creator = msg.sender;
 		// Require a valid name
 		require(bytes(_matricNo).length > 0);
 		transcriptCount++;
-		results[_matricNo] = Result(transcriptCount, creator,  _matricNo, _gpa, _examName, _examUnit, _examGrade);
-		emit Entry(transcriptCount, creator,  _matricNo, _gpa, _examName, _examUnit, _examGrade);
+		results[_matricNo] = Result(transcriptCount, creator,  _matricNo, _gpa, _examCode, _examName, _examUnit, _examGrade);
+		emit Entry(transcriptCount, creator,  _matricNo, _gpa, _examCode,_examName, _examUnit, _examGrade);
 	}
 
-	function getUser(string memory _matricNo) public view returns (string memory, string memory, string[] memory, uint[] memory, string[] memory) {
-		return (results[_matricNo].matricNo, results[_matricNo].gpa, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
+	function getUser(string memory _matricNo) public view returns (string memory, string memory, string[] memory, string[] memory, uint[] memory, string[] memory) {
+		return (results[_matricNo].matricNo, results[_matricNo].gpa, results[_matricNo].examCode, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
 	}
 
 	function viewTranscript(string memory _matricNo) public payable {
@@ -65,7 +66,7 @@ contract Transcript {
 		// sendEth();
 		address requestor = msg.sender;
 		getUser(_matricNo);
-		emit View(transcriptCount, requestor, results[_matricNo].matricNo, results[_matricNo].gpa, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
+		emit View(transcriptCount, requestor, results[_matricNo].matricNo, results[_matricNo].gpa, results[_matricNo].examCode, results[_matricNo].examName, results[_matricNo].examUnit, results[_matricNo].examGrade);
 	}
 
 	function createRequest (string memory _name, string memory _matricNo) public payable returns (string memory) {
