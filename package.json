@@ -1,0 +1,24 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "A decentralised application based on the Ethereum Blockchain that allows Academic Institutions share students academic transcripts in a form that makes it readily accessible to the student. It also provide the functionality that allows students share their academic records with Employers.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryansomto/project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bryansomto/project/issues"
+  },
+  "homepage": "https://github.com/bryansomto/project#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}

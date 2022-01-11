@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, } from "react-router-dom";
 import Web3 from "web3";
 import NavBar from "./Navbar"
 import Transcript from "./build/contracts/Transcript.json";
-import Home from "./pages/home";
+import Login from "./pages/login";
+import CreateAccount from "./pages/createAccount";
 import Lecturer from "./pages/lecturer";
 import GradeScheme from "./pages/gradeScheme";
 import ExamsGrade from "./pages/examsGrade";
@@ -11,7 +12,6 @@ import ViewTranscript from "./pages/viewTranscript";
 import Student from "./pages/student";
 import EmployerRequest from "./pages/employerRequest";
 import Employer from "./pages/employer";
-import PrintLayout from "./pages/printLayout";
 
 class App extends Component {
 
@@ -74,7 +74,6 @@ class App extends Component {
     }
     this.createTranscript = this.createTranscript.bind(this);
     this.viewTranscript = this.viewTranscript.bind(this);
-    this.layout = this.layout.bind(this);
   }
 
   createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade) {
@@ -90,7 +89,7 @@ class App extends Component {
     this.setState({ loading: true });
     this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
     .once('receipt', (receipt) => {
-      console.log(receipt);
+      this.setState({ loading: false })
       let events = receipt.events.View.returnValues;
       let matNo = events.matricNo;
       let gpa = events.gpa;
@@ -98,27 +97,22 @@ class App extends Component {
       let examName = events.examName;
       let examUnit = events.examUnit;
       let examGrade = events.examGrade;
-      this.setState({ matricNo: matNo, gpa: gpa, examName: examName, examUnit: examUnit, examGrade: examGrade, loading: false });
-      // this.setState({ loading: false });
-      window.location.href = "/printLayout";
+      this.setState({ matricNo: matNo, gpa: gpa, examCode: examCode, examName: examName, examUnit: examUnit, examGrade: examGrade, });
+      // console.log(this.state);
     });
   }
 
-  layout() {
-        console.log("layout", this.state);
-        // for (var k = 0; k < this.examName.length; k++) {
-        //     layoutTable.innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCode'>" + courses[k].innerHTML + "</td><td class='courseTitle'>" + courseTitle[k].innerHTML + "</td><td>" + unitsArr[k] + "</td><td class='grade'>" + grades[k] + "</td></tr>";
-        // }
-  }
-  
-
   render() {
+    
     return (
       <body>
         <Router>
           <NavBar account = {this.state.account}/>
             <Route exact path="/">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Home />}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Login />}
+            </Route>
+            <Route exact path="/createaccount">
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <CreateAccount />}
             </Route>
             <Route exact path="/lecturer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Lecturer />}
@@ -130,22 +124,19 @@ class App extends Component {
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ExamsGrade createTranscript={this.createTranscript}/>}
             </Route>
             <Route exact path="/lecturer/viewTranscript">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}/>}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} matricNo={this.state.matricNo} gpa={this.state.gpa} examCode={this.state.examCode}  examName={this.state.examName} examUnit={this.state.examUnit} examGrade={this.state.examGrade} />}
             </Route>
             <Route exact path="/student">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Student />}
             </Route>
             <Route exact path="/student/viewTranscript">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}/>}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} matricNo={this.state.matricNo} gpa={this.state.gpa} examCode={this.state.examCode} examName={this.state.examName} examUnit={this.state.examUnit} examGrade={this.state.examGrade} />}
             </Route>
             <Route exact path="/student/employerRequest">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}/>}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript />}
             </Route>
             <Route exact path="/employer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
-            </Route>
-            <Route exact path="/printLayout">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <PrintLayout layout={this.layout}/>}
             </Route>
         </Router>
        </body>

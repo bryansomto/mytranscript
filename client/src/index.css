@@ -24,9 +24,9 @@ Form{
   font-size: .9em;
 }
 
-/**{
-  border: solid 1px black;
-}*/
+*{
+  /* border: solid 1px black; */
+}
 
 .saveAdd{
   float: right;
@@ -65,5 +65,10 @@ Form{
 }
 
 h1, Form{
-  font-variant: small-caps;
+  /* 
+  font-variant: small-caps; */
+}
+
+#signup, #login{
+  /* padding: 2px; */
 }
