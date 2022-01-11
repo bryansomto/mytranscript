@@ -32,14 +32,15 @@ const Login = () => {
 				data: formData,
 				dataType: 'json',
 			})
-			.done(function(result) {
+			.done(function() {
 				// $("#error").html(result);
 				console.log('success');
 			})
-			.fail(function(result) {
+			.fail(function() {
 				// $("#error").html(result);
 				console.log('fail');
 			});
+			console.log('end');
 		});
 	});
     

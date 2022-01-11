@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(function(req, res, next){
-    res.header("Access-Control-Allow-Origin", true);
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
@@ -33,6 +33,7 @@ app.post("/api", (req, res) => {
     if (req.body.username == loginDetails.username) {
         // return res.redirect("/student");
         console.log('success')
+        return res.json({status: 'Login successful'})
     }
     else {
         console.log('fail');
