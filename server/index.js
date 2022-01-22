@@ -31,7 +31,7 @@ app.use(function(req, res, next){
 app.post("/api", (req, res) => {
     // console.log(req.body);
     if (req.body.username == loginDetails.username) {
-        // return res.redirect("/student");
+        return res.redirect("./student");
         console.log('success')
         return res.json({status: 'Login successful'})
     }

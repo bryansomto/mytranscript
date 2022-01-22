@@ -44,7 +44,7 @@ Form{
 #popUpAreaVisible {
   font-weight: bold;
   background-color: blanchedalmond;
-  display: block;
+  display: inline-block;
   position: absolute;
   padding: 2%;
   top: 300px;

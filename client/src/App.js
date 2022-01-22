@@ -70,16 +70,27 @@ class App extends Component {
       examName: [],
       examUnit: [],
       examGrade: [],
+      data1: [],
+      data2: [],
       loading: true
     }
     this.createTranscript = this.createTranscript.bind(this);
     this.viewTranscript = this.viewTranscript.bind(this);
   }
 
-  createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade) {
+  async createTranscript(matricNo, CGPA, H1examCode_1, H1examUnit_1, H1examGrade_1, H1GPA_1, H1examCode_2, H1examUnit_2, H1examGrade_2, H1GPA_2, H2examCode_1, H2examUnit_1, H2examGrade_1, H2GPA_1, H2examCode_2, H2examUnit_2, H2examGrade_2, H2GPA_2) {
     this.setState({ loading: true });
-    this.state.transcript.methods.createTranscript(matricNo, gpa, examCode, examName, examUnit, examGrade).send({ from: this.state.account })
+    this.state.transcript.methods.createTranscript1(matricNo, CGPA, H1examCode_1, H1examUnit_1, H1examGrade_1, H1GPA_1, H1examCode_2, H1examUnit_2, H1examGrade_2, H1GPA_2).send({ from: this.state.account })
     .once('receipt', (receipt) => {
+      this.setState({ data1: receipt});
+    });
+    this.state.transcript.methods.createTranscript2(matricNo, H2examCode_1, H2examUnit_1, H2examGrade_1, H2GPA_1, H2examCode_2, H2examUnit_2, H2examGrade_2, H2GPA_2).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({ data2: receipt});
+      // console.log(this.state.data1, this.state.data2);
+      let result1 = this.state.data1.events.Entry1.returnValues;
+      let result2 = this.state.data2.events.Entry2.returnValues;
+      console.log(result1.CGPA, result2.H2examCode_1);
       this.setState({ loading: false});
     });
   }
@@ -89,16 +100,55 @@ class App extends Component {
     this.setState({ loading: true });
     this.state.transcript.methods.viewTranscript(matricNo).send({ from: this.state.account })
     .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-      let events = receipt.events.View.returnValues;
-      let matNo = events.matricNo;
-      let gpa = events.gpa;
-      let examCode = events.examCode
-      let examName = events.examName;
-      let examUnit = events.examUnit;
-      let examGrade = events.examGrade;
-      this.setState({ matricNo: matNo, gpa: gpa, examCode: examCode, examName: examName, examUnit: examUnit, examGrade: examGrade, });
-      // console.log(this.state);
+      this.setState({ loading: false });
+      console.log(receipt);
+      
+      let popUpArea = document.getElementById('popUpArea');
+	  	popUpArea.id = 'popUpAreaVisible';
+      popUpArea.setAttribute("class", "");
+	  	let popUpTable = document.getElementsByClassName('layoutTableBody');
+
+      let events1 = receipt.events.View1.returnValues;
+      let events2 = receipt.events.View2.returnValues;
+
+      let matNo = events1.matricNo;
+      let CGPA = events1.CGPA;
+      let H1examCode_1 = events1.H1examCode_1;
+      let H1examUnit_1 = events1.H1examUnit_1;
+      let H1examGrade_1 = events1.H1examGrade_1;
+      let H1GPA_1 = events1.H1GPA_1;
+      let H1examCode_2 = events1.H1examCode_2;
+      let H1examUnit_2 = events1.H1examUnit_2;
+      let H1examGrade_2 = events1.H1examGrade_2;
+      let H1GPA_2 = events1.H1GPA_2;
+      let H2examCode_1 = events2.H2examCode_1;
+      let H2examUnit_1 = events2.H2examUnit_1;
+      let H2examGrade_1 = events2.H2examGrade_1;
+      let H2GPA_1 = events2.H2GPA_1;
+      let H2examCode_2 = events2.H2examCode_2;
+      let H2examUnit_2 = events2.H2examUnit_2;
+      let H2examGrade_2 = events2.H2examGrade_2;
+      let H2GPA_2 = events2.H2GPA_2;
+      
+      document.getElementById('studentDetail').innerHTML = "<p> <span> Matric Number: " + matNo + "</span><br />" + "<span id='cgpa'>" + CGPA + "</span></p>";
+      for (let k = 0; k < H1examUnit_1.length; k++) {
+        popUpTable[0].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H1examCode_1[k] +  "</td><td class='examUnitPOP'>" + H1examUnit_1[k] + "</td><td class='examGradePOP'>" + H1examGrade_1[k] + "</td></tr>";
+      }
+      for (let k = 0; k < H1examUnit_2.length; k++) {
+        popUpTable[1].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H1examCode_2[k] +  "</td><td class='examUnitPOP'>" + H1examUnit_2[k] + "</td><td class='examGradePOP'>" + H1examGrade_2[k] + "</td></tr>";
+      }
+      for (let k = 0; k < H2examUnit_1.length; k++) {
+        popUpTable[2].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H2examCode_1[k] +  "</td><td class='examUnitPOP'>" + H2examUnit_1[k] + "</td><td class='examGradePOP'>" + H2examGrade_1[k] + "</td></tr>";
+      }
+      for (let k = 0; k < H2examUnit_2.length; k++) {
+        popUpTable[3].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H2examCode_2[k] +  "</td><td class='examUnitPOP'>" + H2examUnit_2[k] + "</td><td class='examGradePOP'>" + H2examGrade_2[k] + "</td></tr>";
+      }
+
+      document.getElementById('H1GPA_1').innerHTML = H1GPA_1;
+      document.getElementById('H1GPA_2').innerHTML = H1GPA_2;
+      document.getElementById('H2GPA_2').innerHTML = H2GPA_2;
+      document.getElementById('H2GPA_1').innerHTML = H2GPA_1;
+      
     });
   }
 
@@ -124,13 +174,13 @@ class App extends Component {
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ExamsGrade createTranscript={this.createTranscript}/>}
             </Route>
             <Route exact path="/lecturer/viewTranscript">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} matricNo={this.state.matricNo} gpa={this.state.gpa} examCode={this.state.examCode}  examName={this.state.examName} examUnit={this.state.examUnit} examGrade={this.state.examGrade} />}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} />}
             </Route>
             <Route exact path="/student">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Student />}
             </Route>
             <Route exact path="/student/viewTranscript">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} matricNo={this.state.matricNo} gpa={this.state.gpa} examCode={this.state.examCode} examName={this.state.examName} examUnit={this.state.examUnit} examGrade={this.state.examGrade} />}
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}  />}
             </Route>
             <Route exact path="/student/employerRequest">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript />}

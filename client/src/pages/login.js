@@ -46,17 +46,17 @@ const Login = () => {
     
 	return(
 		<section  className="pt-5" style={{backgroundImage: 'url(./image/man.jpg)', height: '40em', backgroundRepeat: 'repeat'}}>
-			<input type='submit' id='button1' />
+			{/* <input type='submit' id='button1' /> */}
 			<Form action='./' method='POST' className="form col-10 col-md-4 m-auto rounded p-5" style={{background: 'rgba(0,0,0,.4)', backgroundRepeat: 'repeat'}}>
 				<Form.Group as={Row} controlId="formUsername" className="mb-3">
 				<Col xs=''>
-					<Form.Control type="text" name="username" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="Username"  />
+					<Form.Control type="text" name="username" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="H/CTE/19/0554"  />
 					<Form.Text></Form.Text>
 				</Col>
 				</Form.Group>
 				<Form.Group as={Row} controlId="formPassword" className="mb-3">
 				<Col xs=''>
-					<Form.Control type="password" name="password" placeholder="Password" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="Password" />
+					<Form.Control type="password" name="password" placeholder="Password" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="Key" />
 					<Form.Text></Form.Text>
 				</Col>
 				</Form.Group>
