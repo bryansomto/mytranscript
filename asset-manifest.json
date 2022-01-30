@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/bryansomto/project/static/css/main.950b1802.chunk.css",
-    "main.js": "/bryansomto/project/static/js/main.290b0fad.chunk.js",
-    "main.js.map": "/bryansomto/project/static/js/main.290b0fad.chunk.js.map",
-    "runtime-main.js": "/bryansomto/project/static/js/runtime-main.b1e5e03a.js",
-    "runtime-main.js.map": "/bryansomto/project/static/js/runtime-main.b1e5e03a.js.map",
-    "static/css/2.37c457eb.chunk.css": "/bryansomto/project/static/css/2.37c457eb.chunk.css",
-    "static/js/2.e4a1abf0.chunk.js": "/bryansomto/project/static/js/2.e4a1abf0.chunk.js",
-    "static/js/2.e4a1abf0.chunk.js.map": "/bryansomto/project/static/js/2.e4a1abf0.chunk.js.map",
-    "index.html": "/bryansomto/project/index.html",
-    "precache-manifest.6c2a3a1b645e179250c0682b926bc953.js": "/bryansomto/project/precache-manifest.6c2a3a1b645e179250c0682b926bc953.js",
-    "service-worker.js": "/bryansomto/project/service-worker.js",
-    "static/css/2.37c457eb.chunk.css.map": "/bryansomto/project/static/css/2.37c457eb.chunk.css.map",
-    "static/css/main.950b1802.chunk.css.map": "/bryansomto/project/static/css/main.950b1802.chunk.css.map"
+    "main.css": "/mytranscript/static/css/main.950b1802.chunk.css",
+    "main.js": "/mytranscript/static/js/main.3758d638.chunk.js",
+    "main.js.map": "/mytranscript/static/js/main.3758d638.chunk.js.map",
+    "runtime-main.js": "/mytranscript/static/js/runtime-main.9069c6a8.js",
+    "runtime-main.js.map": "/mytranscript/static/js/runtime-main.9069c6a8.js.map",
+    "static/css/2.37c457eb.chunk.css": "/mytranscript/static/css/2.37c457eb.chunk.css",
+    "static/js/2.e4a1abf0.chunk.js": "/mytranscript/static/js/2.e4a1abf0.chunk.js",
+    "static/js/2.e4a1abf0.chunk.js.map": "/mytranscript/static/js/2.e4a1abf0.chunk.js.map",
+    "index.html": "/mytranscript/index.html",
+    "precache-manifest.033f3dc028c5a66d8977df51442ad52f.js": "/mytranscript/precache-manifest.033f3dc028c5a66d8977df51442ad52f.js",
+    "service-worker.js": "/mytranscript/service-worker.js",
+    "static/css/2.37c457eb.chunk.css.map": "/mytranscript/static/css/2.37c457eb.chunk.css.map",
+    "static/css/main.950b1802.chunk.css.map": "/mytranscript/static/css/main.950b1802.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.b1e5e03a.js",
+    "static/js/runtime-main.9069c6a8.js",
     "static/css/2.37c457eb.chunk.css",
     "static/js/2.e4a1abf0.chunk.js",
     "static/css/main.950b1802.chunk.css",
-    "static/js/main.290b0fad.chunk.js"
+    "static/js/main.3758d638.chunk.js"
   ]
 }
