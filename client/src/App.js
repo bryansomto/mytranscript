@@ -158,34 +158,34 @@ class App extends Component {
       <body>
         <Router>
           <NavBar account = {this.state.account}/>
-            <Route exact path="/">
+            <Route exact path="mytranscript/">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Login />}
             </Route>
-            <Route exact path="/createaccount">
+            <Route exact path="mytranscript/createaccount">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <CreateAccount />}
             </Route>
-            <Route exact path="/lecturer">
+            <Route exact path="mytranscript/lecturer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Lecturer />}
             </Route>
-            <Route exact path="/lecturer/gradeScheme">
+            <Route exact path="mytranscript/lecturer/gradeScheme">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <GradeScheme />}
             </Route>
-            <Route exact path="/lecturer/examsGrade">
+            <Route exact path="mytranscript/lecturer/examsGrade">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ExamsGrade createTranscript={this.createTranscript}/>}
             </Route>
-            <Route exact path="/lecturer/viewTranscript">
+            <Route exact path="mytranscript/lecturer/viewTranscript">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript} />}
             </Route>
-            <Route exact path="/student">
+            <Route exact path="mytranscript/student">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Student />}
             </Route>
-            <Route exact path="/student/viewTranscript">
+            <Route exact path="mytranscript/student/viewTranscript">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}  />}
             </Route>
-            <Route exact path="/student/employerRequest">
+            <Route exact path="mytranscript/student/employerRequest">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript />}
             </Route>
-            <Route exact path="/employer">
+            <Route exact path="mytranscript/employer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
         </Router>

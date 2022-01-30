@@ -10,10 +10,10 @@ class NavBar extends Component {
 					    <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					    <Navbar.Collapse id="basic-navbar-nav">
 					        <Nav className="me-auto">
-					          <Nav.Link id="Login" href="/">Login</Nav.Link>
-					          <Nav.Link id="Lecturer" href="/lecturer">Lecturer</Nav.Link>
-							  <Nav.Link id="Student" href="/student">Student</Nav.Link>
-							  <Nav.Link id="Employer" href="/employer">Employer</Nav.Link>
+					          <Nav.Link id="Login" href="mytranscript/">Login</Nav.Link>
+					          <Nav.Link id="Lecturer" href="mytranscript/lecturer">Lecturer</Nav.Link>
+							  <Nav.Link id="Student" href="mytranscript/student">Student</Nav.Link>
+							  <Nav.Link id="Employer" href="mytranscript/employer">Employer</Nav.Link>
 					        </Nav>
 				        	<small className="text-white text-nowrap d-none d-sm-none d-md-block"><span id="account">{this.props.account}</span></small>         
 				   		</Navbar.Collapse>              
