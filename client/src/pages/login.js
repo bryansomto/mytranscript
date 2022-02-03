@@ -17,37 +17,41 @@ const Login = () => {
 	$(document).ready(function() {
 		$("#submitButton").click(function(event) {
 			event.preventDefault();
-			console.log('still here');
 
 			let formData = {
 				username: $("[name = 'username']").val(),
-				password: $("[password = 'password']").val(),
+				password: $("[name = 'password']").val(),
 			};
 
 			console.log(formData);
 
 			$.ajax({
-				url: 'http://localhost:3001/api',
+				url: 'http://localhost:3001',
 				method: 'POST',
 				data: formData,
 				dataType: 'json',
 			})
-			.done(function() {
-				// $("#error").html(result);
+			.done(function(res) {
 				console.log('success');
+				console.log(res);
+				if (res == 'student') {
+					window.location.href = 'http://localhost:3000/student';
+				}
+				if (res == 'lecturer') {
+					window.location.href = 'http://localhost:3000/lecturer';
+				}
 			})
 			.fail(function() {
 				// $("#error").html(result);
 				console.log('fail');
+				// window.location.href = 'http://localhost:3000/student';
 			});
-			console.log('end');
 		});
 	});
     
 	return(
 		<section  className="pt-5" style={{backgroundImage: 'url(./image/man.jpg)', height: '40em', backgroundRepeat: 'repeat'}}>
-			{/* <input type='submit' id='button1' /> */}
-			<Form action='./' method='POST' className="form col-10 col-md-4 m-auto rounded p-5" style={{background: 'rgba(0,0,0,.4)', backgroundRepeat: 'repeat'}}>
+			<Form action='/' method='POST' className="form col-10 col-md-4 m-auto rounded p-5" style={{background: 'rgba(0,0,0,.4)', backgroundRepeat: 'repeat'}}>
 				<Form.Group as={Row} controlId="formUsername" className="mb-3">
 				<Col xs=''>
 					<Form.Control type="text" name="username" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="H/CTE/19/0554"  />
