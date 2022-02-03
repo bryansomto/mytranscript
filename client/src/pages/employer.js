@@ -51,7 +51,7 @@ class Employer extends Component {
                 <Form action='/api/employer' method='POST' className="form col-10 col-md-4 m-auto rounded p-5" style={{background: 'rgba(0,0,0,.4)', backgroundRepeat: 'repeat'}}>
                     <Form.Group as={Row} controlId="formKey" className="mb-3">
                     <Col xs=''>
-                        <Form.Control type="text" name="key" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="Enter student key"  />
+                        <Form.Control type="text" name="key" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="abgsvd56555sjkjhsjd"  />
                         <Form.Text></Form.Text>
                     </Col>
                     </Form.Group>

@@ -6,7 +6,7 @@ class NavBar extends Component {
 		return(
 				<Navbar bg="primary" variant="dark" expand="lg">
 				    <Container>
-					    <Navbar.Brand href="#home" id="navbar">MyTranscript</Navbar.Brand>
+					    <Navbar.Brand href="/" id="navbar">MyTranscript</Navbar.Brand>
 					    <Navbar.Toggle aria-controls="basic-navbar-nav" />
 					    <Navbar.Collapse id="basic-navbar-nav">
 					        <Nav className="me-auto">

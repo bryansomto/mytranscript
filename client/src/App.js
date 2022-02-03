@@ -128,7 +128,7 @@ class App extends Component {
       let H2examGrade_2 = events2.H2examGrade_2;
       let H2GPA_2 = events2.H2GPA_2;
       
-      document.getElementById('studentDetail').innerHTML = "<p> <span> Matric Number: " + matNo + "</span><br />" + "<span id='cgpa'>" + CGPA + "</span></p>";
+      document.getElementById('studentDetail').innerHTML = "<p> <span> THE FEDERAL POLYTECHNIC, ILARO, DEPARTMENT OF COMPUTER ENGINEERING. </span><br /> <span> Matric Number: " + matNo.toUpperCase() + "</span><br />" + "<span id='cgpa'>" + CGPA + "</span></p>";
       for (let k = 0; k < H1examUnit_1.length; k++) {
         popUpTable[0].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H1examCode_1[k] +  "</td><td class='examUnitPOP'>" + H1examUnit_1[k] + "</td><td class='examGradePOP'>" + H1examGrade_1[k] + "</td></tr>";
       }
@@ -142,10 +142,10 @@ class App extends Component {
         popUpTable[3].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H2examCode_2[k] +  "</td><td class='examUnitPOP'>" + H2examUnit_2[k] + "</td><td class='examGradePOP'>" + H2examGrade_2[k] + "</td></tr>";
       }
 
-      document.getElementById('H1GPA_1').innerHTML = H1GPA_1;
-      document.getElementById('H1GPA_2').innerHTML = H1GPA_2;
-      document.getElementById('H2GPA_2').innerHTML = H2GPA_2;
-      document.getElementById('H2GPA_1').innerHTML = H2GPA_1;
+      document.getElementById('H1GPA_1').innerHTML = "<p> HND 1 First Semester GPA: " + "<span id='H1GPA_1'>" + H1GPA_1 + "</span></p>";
+      document.getElementById('H1GPA_2').innerHTML = "<p> HND 1 Second Semester GPA: " + "<span id='H1GPA_1'>" + H1GPA_2 + "</span></p>";
+      document.getElementById('H2GPA_2').innerHTML = "<p> HND 2 First Semester GPA: " + "<span id='H1GPA_1'>" + H2GPA_1 + "</span></p>";
+      document.getElementById('H2GPA_1').innerHTML = "<p> HND 2 Second Semester GPA: " + "<span id='H1GPA_1'>" + H2GPA_2 + "</span></p>";
       
     });
   }
