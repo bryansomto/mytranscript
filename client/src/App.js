@@ -4,13 +4,11 @@ import Web3 from "web3";
 import NavBar from "./Navbar"
 import Transcript from "./build/contracts/Transcript.json";
 import Login from "./pages/login";
-import CreateAccount from "./pages/createAccount";
 import Lecturer from "./pages/lecturer";
 import GradeScheme from "./pages/gradeScheme";
 import ExamsGrade from "./pages/examsGrade";
 import ViewTranscript from "./pages/viewTranscript";
 import Student from "./pages/student";
-import EmployerRequest from "./pages/employerRequest";
 import Employer from "./pages/employer";
 
 class App extends Component {
@@ -161,8 +159,8 @@ class App extends Component {
             <Route exact path="/">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Login />}
             </Route>
-            <Route exact path="/createaccount">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <CreateAccount />}
+            <Route exact path="/employer">
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
             <Route exact path="/lecturer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Lecturer />}
@@ -181,12 +179,6 @@ class App extends Component {
             </Route>
             <Route exact path="/student/viewTranscript">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}  />}
-            </Route>
-            <Route exact path="/student/employerRequest">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript />}
-            </Route>
-            <Route exact path="/employer">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
         </Router>
        </body>

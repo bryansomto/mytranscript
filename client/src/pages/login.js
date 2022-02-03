@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { Component } from 'react';
 import $ from 'jquery';
 import { Form, Button, Nav, Row, Col } from 'react-bootstrap';
 
@@ -37,7 +37,7 @@ const Login = () => {
 				if (res == 'student') {
 					window.location.href = 'http://localhost:3000/student';
 				}
-				if (res == 'lecturer') {
+				else if (res == 'lecturer') {
 					window.location.href = 'http://localhost:3000/lecturer';
 				}
 			})
@@ -66,7 +66,7 @@ const Login = () => {
 				</Form.Group>
 				<Button type='submit' id='submitButton' variant='btn btn-primary' className="rounded-pill col-12 mb-1"> Login </Button>
 				<div className='text-muted text-center'>
-					<small className='inline'> Don't have an account? <Nav.Link href="/createaccount" id='signup' className='d-inline-block p-0'>Sign Up</Nav.Link> </small>
+					<small className='inline'> Are you an Employer? <Nav.Link href="/employer" id='signup' className='d-inline-block p-0' onClick="">Click to view a student transcript</Nav.Link> </small>
 				</div>
 				<small id='error'></small>
 			</Form>
