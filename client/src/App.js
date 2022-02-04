@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, } from "react-router-dom";
+import { useMoralis } from "react-moralis";
 import Web3 from "web3";
 import NavBar from "./Navbar"
 import Transcript from "./build/contracts/Transcript.json";
@@ -18,6 +19,21 @@ class App extends Component {
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
+    await this.moralis();
+  }
+
+  async moralis() {
+    const { authenticate, isAuthenticated, user } = useMoralis();
+    if (!isAuthenticated) {
+      return (
+        <div>
+          <button onClick={ () => authenticate() }>Authenticate</button>
+        </div>
+      )
+    }
+    else {
+      document.getElementById("moralisUsername").innerHTML = "Welcome " + user.get("username");
+    }
   }
 
   async loadWeb3() {
@@ -156,6 +172,7 @@ class App extends Component {
     
     return (
       <body>
+        <h1 id="moaralisUsername"></h1>
         <Router>
           <NavBar account = {this.state.account}/>
             <Route exact path="/">
