@@ -1,31 +1,70 @@
-import React, { Component, } from 'react';
-import { Form, Button, } from 'react-bootstrap';
-// import '../index.css';
+import React, { Component } from 'react';
+import $ from 'jquery';
+import { Form, Button, Row, Col, Nav } from 'react-bootstrap';
 
 class Employer extends Component {
-	constructor(props) {
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+        this.category = this.category.bind(this);
+        this.submit = this.submit.bind(this);
+      }
 
-	render() {
-		return (
-			<body>
-				<section className="container">
-                    <h1 className='text-center'>Employer Request Form</h1>
-					<span className='text-muted text-center'>The Employer request form enables you make a request to view a prospective employees' academic transcript. Request made will have to be approved by the Employee before you can view it.</span>
-					<Form.Group controlId="formMatricnumber" className="p-3 m-auto col-md-6">
-                        <Form.Label className="d-inline"> Employer Name </Form.Label>
-	                    <Form.Control type="text" name="matricnumber" className='mb-2' placeholder="Bee Association" />
-	                    <Form.Text></Form.Text>
-	                    <Form.Label className="d-inline"> Employee matric number </Form.Label>
-	                    <Form.Control type="text" name="matricnumber" className='mb-2' placeholder="H/CTE/19/0554" />
-	                    <Form.Text></Form.Text>
-	                    <Button className="btn btn-success mt-2"> Make Request </Button>
-	                </Form.Group>
-				</section>
-			</body>
-		)
-	}
+    category = () => {
+        let category = document.getElementById('category');
+        if (category.value == 'student' || category.value == 'employer'){
+            category.style.color = '#fff';
+        }
+        else {
+            category.style.color = '#777';
+        }
+    }
+
+    submit = () => {
+        $("#submitButton").click(function(event) {
+            event.preventDefault();
+
+            let formData = {
+                key: $("[name = 'key']").val(),
+            };
+
+            console.log(formData);
+
+            $.ajax({
+                url: 'http://localhost:3001/api/employer',
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+            })
+            .done(function(res) {
+                console.log(res);
+            })
+            .fail(function(res) {
+                console.log(res);
+            });
+        });
+    }
+    
+
+    render() {
+        return(
+            <section  className="pt-5" style={{backgroundImage: 'url(./image/man.jpg)', height: '40em', backgroundRepeat: 'repeat'}}>
+                <Form action='/api/employer' method='POST' className="form col-10 col-md-4 m-auto rounded p-5" style={{background: 'rgba(0,0,0,.4)', backgroundRepeat: 'repeat'}}>
+                    <Form.Group as={Row} controlId="formKey" className="mb-3">
+                    <Col xs=''>
+                        <Form.Control type="text" name="key" className="rounded-pill" style={{color: '#fff', background: 'rgba(0,0,0,.1)'}} placeholder="abgsvd56555sjkjhsjd"  />
+                        <Form.Text></Form.Text>
+                    </Col>
+                    </Form.Group>
+                    <Button type='submit' id='submitButton' variant='btn btn-primary' className="rounded-pill col-12 mb-1" onClick={this.submit}> View Transcript </Button>
+                    <div className='text-muted text-center'>
+                        <small className='inline'> Not an Employer? <Nav.Link href="/" id='login' className='d-inline-block p-0'> Login </Nav.Link> </small>
+                    </div>
+                    <small id='error'></small>
+                </Form>
+			
+		    </section>
+        )
+    }
 }
 
 export default Employer;

@@ -5,13 +5,11 @@ import Web3 from "web3";
 import NavBar from "./Navbar"
 import Transcript from "./build/contracts/Transcript.json";
 import Login from "./pages/login";
-import CreateAccount from "./pages/createAccount";
 import Lecturer from "./pages/lecturer";
 import GradeScheme from "./pages/gradeScheme";
 import ExamsGrade from "./pages/examsGrade";
 import ViewTranscript from "./pages/viewTranscript";
 import Student from "./pages/student";
-import EmployerRequest from "./pages/employerRequest";
 import Employer from "./pages/employer";
 
 class App extends Component {
@@ -56,7 +54,7 @@ class App extends Component {
   
 
   async loadBlockchainData() {
-    const web3 = new Web3(window.web3);
+    const web3 = new Web3(window.web3.currentProvider);
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -146,7 +144,7 @@ class App extends Component {
       let H2examGrade_2 = events2.H2examGrade_2;
       let H2GPA_2 = events2.H2GPA_2;
       
-      document.getElementById('studentDetail').innerHTML = "<p> <span> Matric Number: " + matNo + "</span><br />" + "<span id='cgpa'>" + CGPA + "</span></p>";
+      document.getElementById('studentDetail').innerHTML = "<p> <span> THE FEDERAL POLYTECHNIC, ILARO, DEPARTMENT OF COMPUTER ENGINEERING. </span><br /> <span> Matric Number: " + matNo.toUpperCase() + "</span><br />" + "<span id='cgpa'>" + CGPA + "</span></p>";
       for (let k = 0; k < H1examUnit_1.length; k++) {
         popUpTable[0].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H1examCode_1[k] +  "</td><td class='examUnitPOP'>" + H1examUnit_1[k] + "</td><td class='examGradePOP'>" + H1examGrade_1[k] + "</td></tr>";
       }
@@ -160,10 +158,10 @@ class App extends Component {
         popUpTable[3].innerHTML += "<tr><td>" + (k + 1) + "</td><td class='examCodePOP'>" + H2examCode_2[k] +  "</td><td class='examUnitPOP'>" + H2examUnit_2[k] + "</td><td class='examGradePOP'>" + H2examGrade_2[k] + "</td></tr>";
       }
 
-      document.getElementById('H1GPA_1').innerHTML = H1GPA_1;
-      document.getElementById('H1GPA_2').innerHTML = H1GPA_2;
-      document.getElementById('H2GPA_2').innerHTML = H2GPA_2;
-      document.getElementById('H2GPA_1').innerHTML = H2GPA_1;
+      document.getElementById('H1GPA_1').innerHTML = "<p> HND 1 First Semester GPA: " + "<span id='H1GPA_1'>" + H1GPA_1 + "</span></p>";
+      document.getElementById('H1GPA_2').innerHTML = "<p> HND 1 Second Semester GPA: " + "<span id='H1GPA_1'>" + H1GPA_2 + "</span></p>";
+      document.getElementById('H2GPA_2').innerHTML = "<p> HND 2 First Semester GPA: " + "<span id='H1GPA_1'>" + H2GPA_1 + "</span></p>";
+      document.getElementById('H2GPA_1').innerHTML = "<p> HND 2 Second Semester GPA: " + "<span id='H1GPA_1'>" + H2GPA_2 + "</span></p>";
       
     });
   }
@@ -178,8 +176,8 @@ class App extends Component {
             <Route exact path="/">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Login />}
             </Route>
-            <Route exact path="/createaccount">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <CreateAccount />}
+            <Route exact path="/employer">
+              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
             <Route exact path="/lecturer">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Lecturer />}
@@ -198,12 +196,6 @@ class App extends Component {
             </Route>
             <Route exact path="/student/viewTranscript">
               {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript viewTranscript={this.viewTranscript}  />}
-            </Route>
-            <Route exact path="/student/employerRequest">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <ViewTranscript />}
-            </Route>
-            <Route exact path="/employer">
-              {this.state.loading ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div> : <Employer />}
             </Route>
         </Router>
        </body>
